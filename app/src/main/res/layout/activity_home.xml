@@ -5,41 +5,40 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="60dp">
+    android:layout_marginBottom="60dp"
+    tools:context=".HomeActivity">
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="나의 일기장"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="나의 일기장"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <ListView
+        android:id="@+id/diaryListView"
         android:layout_width="match_parent"
-        android:layout_height="514dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/writeButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -48,4 +47,5 @@
         android:layout_marginBottom="10dp"
         android:text="작성하기"
         android:textColor="@color/white" />
+
 </LinearLayout>

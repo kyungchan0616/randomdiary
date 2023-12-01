@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".WriteActivity">
 
     <RelativeLayout
         android:id="@+id/TopLayout"
@@ -23,8 +24,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:gravity="left"
             android:fontFamily="serif-monospace"
+            android:gravity="left"
             android:text="yy/MM/DD"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -56,16 +57,15 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/edit_title"
+                    android:id="@+id/today_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:text="오늘의 주제"
-                    android:textAlignment="center"
                     android:fontFamily="serif-monospace"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray"
                     android:textSize="32sp" />
@@ -144,17 +144,4 @@
             android:text="닫기" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/timerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="수정 남은 기한 00:00:00"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:textColor="@android:color/holo_red_dark" />
 </RelativeLayout>
