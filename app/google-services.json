@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1066925381823",
+    "firebase_url": "https://random-diary-48ac7-default-rtdb.firebaseio.com",
+    "project_id": "random-diary-48ac7",
+    "storage_bucket": "random-diary-48ac7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066925381823:android:c3430a9016af7e13cc4e0a",
+        "android_client_info": {
+          "package_name": "com.example.randomdiary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFWT5AqJ4E0-rC2UjKgq2WRBMP9AlBRXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

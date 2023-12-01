@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditActivity">
+
+<!-- 상단 레이아웃 -->
+    <RelativeLayout
+        android:id="@+id/TopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:elevation="10dp"
+        android:padding="4dp"/>
+
+    <!-- 내용 레이아웃 -->
+    <RelativeLayout
+        android:id="@+id/ContentsLayout"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/TopLayout"
+        android:layout_above="@+id/MoodLayout"
+        android:layout_height="match_parent">
+
+        <!-- 카드뷰 내용 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentTop="true"
+            app:cardBackgroundColor="#FFFFFFFF"
+            app:cardCornerRadius="10dp"
+            android:elevation="10dp"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- 주제 표시 EditText -->
+                <TextView
+                    android:id="@+id/edit_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="left"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/edit_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:textAlignment="center"
+                    android:fontFamily="serif-monospace"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="32sp" />
+
+
+
+                <!-- 내용 입력 EditText -->
+                <EditText
+                    android:id="@+id/edit_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="15sp"
+                    android:fontFamily="serif-monospace"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <!-- 기분 레이아웃 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/MoodLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_above="@+id/BottomLayout"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="#FFFFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 기분 표시 부분 추가 -->
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 하단 레이아웃 -->
+    <RelativeLayout
+        android:id="@+id/BottomLayout"
+        android:layout_marginBottom="60dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <!-- 저장 버튼 -->
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="serif-monospace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장" />
+
+        <!-- 삭제 버튼 -->
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="serif-monospace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제" />
+
+        <!-- 닫기 버튼 -->
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="serif-monospace"
+            android:text="닫기" />
+    </RelativeLayout>
+
+    <!-- 타이머 표시 TextView (맨 아래로 이동) -->
+    <TextView
+        android:id="@+id/timerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="수정 남은 기한 00:00:00"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@android:color/holo_red_dark" />
+</RelativeLayout>
