@@ -22,6 +22,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="casual"
             android:text="평가별 일기장"
             android:textAlignment="center"
             android:textSize="30sp"

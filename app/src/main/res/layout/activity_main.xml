@@ -7,14 +7,14 @@
     tools:context=".MainActivity"
     android:background="@drawable/paper">
 
-
-<TextView
+    <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="200dp"
         android:text="오늘 주제는 뭘까?"
+        android:fontFamily="casual"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30dp"
