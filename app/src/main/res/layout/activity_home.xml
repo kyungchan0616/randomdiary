@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/writeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,6 +47,32 @@
         android:layout_marginRight="3dp"
         android:layout_marginBottom="10dp"
         android:text="작성하기"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/evalButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:text="평가별 일기보기"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/themaButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:text="테마별 일기보기"
         android:textColor="@color/white" />
 
 </LinearLayout>

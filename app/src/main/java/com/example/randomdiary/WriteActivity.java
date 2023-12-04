@@ -5,22 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -39,7 +35,9 @@ public class WriteActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private String titleFromFirebase;
-    private String themaFromFirebase;
+    private String themeFromFirebase;
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +52,8 @@ public class WriteActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("todaytitle");
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
         String currentDate = sdf.format(new Date());
@@ -122,7 +122,7 @@ public class WriteActivity extends AppCompatActivity {
 
                 if (selectedSnapshot != null) {
                     titleFromFirebase = String.valueOf(selectedSnapshot.child("title").getValue());
-                    themaFromFirebase = String.valueOf(selectedSnapshot.child("thema").getValue());
+                    themeFromFirebase = String.valueOf(selectedSnapshot.child("thema").getValue());
                     todayTitle.setText(titleFromFirebase);
                 }
             }
@@ -143,10 +143,26 @@ public class WriteActivity extends AppCompatActivity {
         String uniqueKey = databaseReference.push().getKey();
 
         DatabaseReference saveReference = databaseReference.child(uniqueKey);
+
+        // 사용자가 로그인되어 있으면 이메일 주소를 저장
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            saveReference.child("user_email").setValue(currentUser.getEmail());
+        }
+
         saveReference.child("content").setValue(userContent);
         saveReference.child("date").setValue(currentDateAndTime);
-        saveReference.child("thema").setValue(themaFromFirebase);
+        saveReference.child("theme").setValue(themeFromFirebase);
         saveReference.child("title").setValue(titleFromFirebase);
+
+        // RadioGroup에서 선택된 RadioButton의 tag 값을 가져와 "eval"로 저장
+        RadioGroup radioGroup = findViewById(R.id.moodRadioGroup);
+        int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+        if (selectedRadioButtonId != -1) {
+            RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
+            String eval = selectedRadioButton.getTag().toString();
+            saveReference.child("eval").setValue(eval);
+        }
 
         startHomeActivity();
     }

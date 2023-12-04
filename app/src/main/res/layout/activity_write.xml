@@ -109,6 +109,34 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RadioGroup
+                android:id="@+id/moodRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/goodButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="오늘의 일기 만족해요 !"
+                    android:tag="good" /> <!-- 여기에 eval 값을 설정 -->
+
+                <RadioButton
+                    android:id="@+id/sosoButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="오늘의 일기 그저그래요."
+                    android:tag="soso" /> <!-- 여기에 eval 값을 설정 -->
+
+                <RadioButton
+                    android:id="@+id/badButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="오늘의 일기 아시워요 ㅠㅠ"
+                    android:tag="bad" /> <!-- 여기에 eval 값을 설정 -->
+
+            </RadioGroup>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -121,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +161,7 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/closeButton"
             android:layout_alignParentRight="true"
             android:layout_marginRight="80dp"

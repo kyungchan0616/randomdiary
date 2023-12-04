@@ -50,6 +50,16 @@
             android:label="Edit Activity">
         </activity>
 
+        <activity
+            android:name=".EvalActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ThemaActivity"
+            android:exported="true">
+        </activity>
+
 
     </application>
 
