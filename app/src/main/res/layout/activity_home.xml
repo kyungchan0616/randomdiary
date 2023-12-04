@@ -6,9 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="60dp"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    android:background="@drawable/paper">
 
-    <TextView
+<TextView
         android:id="@+id/text4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +34,7 @@
         android:id="@+id/diaryListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/writeButton"

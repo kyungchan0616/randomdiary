@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     String diaryDate = snapshot.child("date").getValue(String.class);
 
                     // 리스트에 표시할 문자열 생성
-                    String entry = diaryDate + "에 작성된 일기 "  + " \n\n " + diaryKey;
+                    String entry = diaryDate + "에 작성된 일기 " ;
 
                     // 리스트에 추가
                     diaryKeys.add(diaryKey);
@@ -112,6 +113,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 if (dataSnapshot.exists()) {
                     // 오늘 날짜에 해당하는 일기가 이미 작성되었음
                     // 여기에서 사용자에게 메시지를 보여주거나 다른 동작을 수행할 수 있음
+                    showToast("오늘은 이미 일기를 썼네요");
                 } else {
                     // 오늘 날짜에 해당하는 일기가 아직 작성되지 않았음
                     Intent intent = new Intent(HomeActivity.this, WriteActivity.class);
@@ -124,5 +126,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 // Failed to read value
             }
         });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
