@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startThemaActivity() {
-        Intent intent = new Intent(this, ThemaActivity.class);
+        Intent intent = new Intent(this, ThemeActivity.class);
         startActivity(intent);
     }
 

@@ -56,7 +56,7 @@
         </activity>
 
         <activity
-            android:name=".ThemaActivity"
+            android:name=".ThemeActivity"
             android:exported="true">
         </activity>
 

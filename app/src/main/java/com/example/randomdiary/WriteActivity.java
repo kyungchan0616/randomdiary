@@ -1,6 +1,7 @@
 package com.example.randomdiary;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -30,6 +34,8 @@ public class WriteActivity extends AppCompatActivity {
     private Button saveButton;
     private Button closeButton;
     private TextView todayTitle;
+    private ImageView retitleImageView;
+    private ImageView resetImageView; // Added resetImageView
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -38,6 +44,8 @@ public class WriteActivity extends AppCompatActivity {
     private String themeFromFirebase;
 
     private FirebaseAuth firebaseAuth;
+
+    private int clickCount; // 클릭 횟수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +57,15 @@ public class WriteActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         closeButton = findViewById(R.id.closeButton);
         todayTitle = findViewById(R.id.today_title);
-
+        retitleImageView = findViewById(R.id.retitleimageView);
+        resetImageView = findViewById(R.id.resetimageView);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("todaytitle");
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        // 이미 한 번 클릭한 경우를 체크
+        checkAndResetClickCount();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
         String currentDate = sdf.format(new Date());
@@ -78,6 +90,33 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        // 이미지 뷰 클릭 이벤트 처리
+        retitleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 클릭할 때마다 clickCount 증가
+                clickCount++;
+
+                // clickCount가 1인 경우에만 Todaytitle 갱신
+                if (clickCount == 1) {
+                    updateTodayTitle();
+                    showToast("새로운 주제로 일기를 써볼까요?!");
+                } else {
+                    showToast("하루에 한 번만 가능해요 ㅠㅠ");
+                }
+            }
+        });
+
+        // 이미지 뷰 클릭 이벤트 처리 - resetImageView
+        resetImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 클릭할 때마다 clickCount 초기화
+                clickCount = 0;
+                showToast("ClickCount가 0으로 초기화되었습니다.");
             }
         });
     }
@@ -171,5 +210,55 @@ public class WriteActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void updateTodayTitle() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                int size = (int) dataSnapshot.getChildrenCount();
+                int randomIndex = new Random().nextInt(size);
+
+                DataSnapshot selectedSnapshot = null;
+                for (DataSnapshot snapshot : children) {
+                    if (randomIndex-- == 0) {
+                        selectedSnapshot = snapshot;
+                        break;
+                    }
+                }
+
+                if (selectedSnapshot != null) {
+                    titleFromFirebase = String.valueOf(selectedSnapshot.child("title").getValue());
+                    themeFromFirebase = String.valueOf(selectedSnapshot.child("thema").getValue());
+                    todayTitle.setText(titleFromFirebase);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // 가져오기 실패 시 처리
+            }
+        });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void checkAndResetClickCount() {
+        // SharedPreferences에서 마지막으로 클릭한 날짜를 가져옴
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        long lastClickTimestamp = prefs.getLong("lastClickTimestamp", 0);
+
+        // 현재 날짜와 비교
+        Calendar cal = Calendar.getInstance();
+        long currentTimestamp = cal.getTimeInMillis();
+
+        // 하루가 지났으면 clickCount를 초기화하고 현재 날짜로 갱신
+        if (currentTimestamp - lastClickTimestamp > 24 * 60 * 60 * 1000) {
+            clickCount = 0;
+            prefs.edit().putLong("lastClickTimestamp", currentTimestamp).apply();
+        }
     }
 }
